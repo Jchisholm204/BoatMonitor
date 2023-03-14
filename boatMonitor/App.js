@@ -1,21 +1,107 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { ReactDOM, React } from 'react';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app</Text>
-      <StatusBar style="auto" />
+    <View style={mainStyle.container}>
+      <StatusBar style={headerStyle.container} />
+      <View style={headerStyle.container}>
+        <Text style={{color:'white', fontSize:20,marginTop: 15,}}>Boat Monitor</Text>
+      </View>
+      <View style={CamStyle.container}>
+        <Text style={{color:'white', fontSize:20,}}>No Video Stream</Text>
+      </View>
+      <View style={SensorStyle.container}>
+        <Text style={IdentifierText.container}>Cabin</Text>
+        <View style={ReadoutStyle.container}>
+          <Text style={IdentifierText.container}>Humidity:</Text>
+          <Text id='CabinHumid' style={IdentifierText.container}>-- %</Text>
+        </View>
+        <View style={ReadoutStyle.container}>
+          <Text style={IdentifierText.container}>Temperature:</Text>
+          <Text id='CabinTemp' style={IdentifierText.container}>-- °C</Text>
+        </View>
+      </View>
+      <View style={SensorStyle.container}>
+      <Text style={IdentifierText.container}>Engine</Text>
+      <View style={ReadoutStyle.container}>
+          <Text style={IdentifierText.container}>Humidity:</Text>
+          <Text id='EngineHumid' style={IdentifierText.container}>-- %</Text>
+        </View>
+        <View style={ReadoutStyle.container}>
+          <Text style={IdentifierText.container}>Temperature:</Text>
+          <Text id='EngineTemp' style={IdentifierText.container}>-- °C</Text>
+        </View>
+      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const mainStyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
   }
 });
-// hi
+
+const headerStyle = StyleSheet.create({
+  container: {
+    backgroundColor: '#00C2FF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 0,
+    marginTop: 0,
+    borderRadius: 0,
+    height: 80,
+  }
+});
+
+const CamStyle = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 30,
+    borderRadius: 16,
+    color: 'white',
+    minHeight: 120,
+  }
+});
+
+const SensorStyle = StyleSheet.create({
+  container: {
+    flex:1,
+    flexDirection: 'column',
+    backgroundColor: '#6ADBFF',
+    margin: 30,
+    marginTop: 0,
+    borderRadius: 16,
+    color: 'white',
+    alignItems: 'center',
+  }
+});
+
+const IdentifierText = StyleSheet.create({
+  container: {
+    color: 'black',
+    fontSize: 20,
+    padding: 10,
+  }
+});
+
+const ReadoutStyle = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    margin: 25,
+    marginTop: 5,
+    marginBottom: 25,
+    borderRadius: 33,
+    justifyContent: 'space-between',
+    alignSelf: 'stretch',
+  }
+});
