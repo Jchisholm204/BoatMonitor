@@ -1,0 +1,387 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Top Banner */
+.topbanner { 
+position: absolute;
+width: 393px;
+height: 60px;
+left: 0px;
+top: 0px;
+
+background: #00C2FF;
+
+}
+
+/* Boat Monitor */
+.boatmonitor {
+  position: absolute;
+  width: 197px;
+  height: 42px;
+  left: 105px;
+  top: 9px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  
+  color: #000000;}
+
+/* image 1 */
+
+.image1{
+position: absolute;
+width: 72px;
+height: 62px;
+left: 158px;
+top: 200px;
+
+background: (image 1.png);
+}
+
+/* No Connection */
+
+.connection{
+position: absolute;
+width: 99px;
+height: 16px;
+left: 145px;
+top: 278px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+
+color: #FFFFFF;
+}
+
+/* image 2 */
+.image2{
+position: absolute;
+width: 49px;
+height: 60px;
+left: 10px;
+top: 0px;
+
+background: (image 2.png);
+}
+
+/* Camera Stream */
+
+.camera{
+position: absolute;
+width: 340px;
+height: 313px;
+left: 24.5px;
+top: 80px;
+
+background: #000000;
+border-radius: 11px;
+}
+
+/* Rectangle 1 */
+
+.rec1 {
+  position: absolute;
+  width: 337px;
+  height: 193px;
+  left: 26px;
+  top: 410px;
+  
+  background: #6ADBFF;
+  border-radius: 16px;
+  
+}
+
+/* Cabin */
+
+.cabin{
+position: absolute;
+width: 76px;
+height: 44px;
+left: 158px;
+top: 422px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+}
+
+/* Small Rectangle 1 */
+
+.srec1{
+position: absolute;
+width: 305px;
+height: 41px;
+left: 43px;
+top: 466px;
+
+background: #FFFFFF;
+border-radius: 33px;
+}
+
+/* Temperature: (1)*/
+
+.tempword1{
+position: absolute;
+width: 109px;
+height: 20px;
+left: 57px;
+top: 477px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+/* --°C (1)*/
+
+.degree1{
+position: absolute;
+width: 67px;
+height: 26px;
+left: 264px;
+top: 474px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+}
+
+/* Small Rectangle 2 */
+
+.srec2{
+position: absolute;
+width: 305px;
+height: 41px;
+left: 44px;
+top: 528px;
+
+background: #FFFFFF;
+border-radius: 33px;
+}
+
+/* Humidity: (1)*/
+
+.humidword1{
+position: absolute;
+width: 109px;
+height: 20px;
+left: 55px;
+top: 539px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+/* --% (1)*/
+
+.percent1{
+position: absolute;
+width: 67px;
+height: 26px;
+left: 272px;
+top: 536px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+
+/* Rectangle 2 */
+}
+
+.rec2{
+position: absolute;
+width: 337px;
+height: 193px;
+left: 26px;
+top: 619px;
+
+background: #6ADBFF;
+border-radius: 16px;
+}
+
+/* Engine */
+
+.engine{
+position: absolute;
+width: 89px;
+height: 44px;
+left: 155px;
+top: 626px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+}
+
+
+/* Small Rectangle 3 */
+
+.srec3{
+position: absolute;
+width: 305px;
+height: 41px;
+left: 43px;
+top: 675px;
+
+background: #FFFFFF;
+border-radius: 33px;
+}
+
+/* Temperature: (2)*/
+
+.tempword2{
+position: absolute;
+width: 109px;
+height: 20px;
+left: 57px;
+top: 686px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+/* --°C (2)*/
+
+.degree2{
+position: absolute;
+width: 67px;
+height: 26px;
+left: 264px;
+top: 683px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+}
+
+
+/* Small Rectangle 4 */
+
+.srec4{
+position: absolute;
+width: 305px;
+height: 41px;
+left: 44px;
+top: 737px;
+
+background: #FFFFFF;
+border-radius: 33px;
+}
+
+/* Humidity: (2)*/
+
+.humidword2{
+position: absolute;
+width: 109px;
+height: 20px;
+left: 55px;
+top: 748px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+/* --% (2)*/
+
+.percent2{
+position: absolute;
+width: 67px;
+height: 26px;
+left: 272px;
+top: 745px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+}

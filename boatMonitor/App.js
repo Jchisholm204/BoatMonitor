@@ -1,8 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { ReactDOM, React } from 'react';
+import { ReactDOM, React, useState, useEffect } from 'react';
+// const io = require('socket.io-client');
+// const socket = io('10.216.75.65:5566');
+
 
 export default function App() {
+
+  const [data, setMessage] = useState("");
+
+  useEffect(() => {
+    var timer = setInterval(() => {
+      fetch("http://10.216.75.65:8000/message")
+      .then((res) => res.json())
+      .then((data) => setMessage(data));
+    }, 300);
+  }, []);
+
+  // useEffect(() => {
+  //   fetch("http://10.216.75.65:8000")
+  //     .then((res) => JSON.parse(res))
+  //     .then((data) => setMessage(data.data));
+
+  //     // const client = TcpSocket.createConnection(options, () =>{
+  //     //   client.write("App");
+  //     //   client.destroy();
+  //     // })
+    
+  //     // client.on('data', function(data) {
+  //     //   setMessage(data);
+  //     // })
+
+  //   // setMessage("hellp")
+  // }, []);
+
+
   return (
     <View style={mainStyle.container}>
       <StatusBar style={headerStyle.container} />
@@ -10,28 +42,28 @@ export default function App() {
         <Text style={{color:'white', fontSize:20,marginTop: 15,}}>Boat Monitor</Text>
       </View>
       <View style={CamStyle.container}>
-        <Text style={{color:'white', fontSize:20,}}>No Video Stream</Text>
+        <Text style={{color:'white', fontSize:20,}}>{data.video}</Text>
       </View>
       <View style={SensorStyle.container}>
         <Text style={IdentifierText.container}>Cabin</Text>
         <View style={ReadoutStyle.container}>
           <Text style={IdentifierText.container}>Humidity:</Text>
-          <Text id='CabinHumid' style={IdentifierText.container}>-- %</Text>
+          <Text id='CabinHumid' style={IdentifierText.container}>{data.topHumidity} %</Text>
         </View>
         <View style={ReadoutStyle.container}>
           <Text style={IdentifierText.container}>Temperature:</Text>
-          <Text id='CabinTemp' style={IdentifierText.container}>-- °C</Text>
+          <Text id='CabinTemp' style={IdentifierText.container}>{data.topTemperature} °C</Text>
         </View>
       </View>
       <View style={SensorStyle.container}>
       <Text style={IdentifierText.container}>Engine</Text>
       <View style={ReadoutStyle.container}>
           <Text style={IdentifierText.container}>Humidity:</Text>
-          <Text id='EngineHumid' style={IdentifierText.container}>-- %</Text>
+          <Text id='EngineHumid' style={IdentifierText.container}>{data.BottomHumidity} %</Text>
         </View>
         <View style={ReadoutStyle.container}>
           <Text style={IdentifierText.container}>Temperature:</Text>
-          <Text id='EngineTemp' style={IdentifierText.container}>-- °C</Text>
+          <Text id='EngineTemp' style={IdentifierText.container}>{data.bottomTemperature} °C</Text>
         </View>
       </View>
     </View>
