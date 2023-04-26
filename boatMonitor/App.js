@@ -11,7 +11,7 @@ export default function App() {
 
   useEffect(() => {
     var timer = setInterval(() => {
-      fetch("http://10.216.75.65:8000/message")
+      fetch("http://192.168.137.127:8000/message")
       .then((res) => res.json())
       .then((data) => setMessage(data));
     }, 300);
@@ -52,7 +52,7 @@ export default function App() {
         </View>
         <View style={ReadoutStyle.container}>
           <Text style={IdentifierText.container}>Temperature:</Text>
-          <Text id='CabinTemp' style={IdentifierText.container}>{data.topTemperature} °C</Text>
+          <Text id='CabinTemp' style={IdentifierText.container}>{parseFloat(data.topTemperature).toPrecision(4)} °C</Text>
         </View>
       </View>
       <View style={SensorStyle.container}>
@@ -63,7 +63,7 @@ export default function App() {
         </View>
         <View style={ReadoutStyle.container}>
           <Text style={IdentifierText.container}>Temperature:</Text>
-          <Text id='EngineTemp' style={IdentifierText.container}>{data.bottomTemperature} °C</Text>
+          <Text id='EngineTemp' style={IdentifierText.container}>{parseFloat(data.bottomTemperature).toPrecision(4)} °C</Text>
         </View>
       </View>
     </View>

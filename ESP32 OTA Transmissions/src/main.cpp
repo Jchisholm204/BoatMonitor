@@ -1,19 +1,14 @@
 #include <Arduino.h>
 #include <WiFi.h>
+#include <Wire.h>
+#include <Adafruit_BMP280.h>
 
-// Current readings
-typedef struct readings{
-  float voltage;
-  float current;
-} readings;
+#define led_pin 4
 
 // Transmit Packet
 typedef struct transmit{
-  char dock;
-  uint8_t slip;
-  readings measurements;
-  uint32_t timeElapsed;
-  float energy;
+  float topTemp;
+  float botTemp;
 } transmit;
 
 // Global Declarations
@@ -23,71 +18,88 @@ char* sendBuffer;
 
 WiFiClient client;
 
-uint64_t timer = 0;
+Adafruit_BMP280 bmp; // I2C
+Adafruit_BMP280 bmp2; // I2C
 
-float readVoltage(){
-  return 3.3;
-}
-
-float readCurrent(){
-  return 0.32;
-}
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
+  pinMode(led_pin, OUTPUT);
 
-  Serial.println("Connecting to WiFi..");
+analogWrite(led_pin, 2);
+  unsigned status;
+  unsigned status2;
+  Wire.begin(14, 15);
+  status = bmp.begin(0x76); // other id is 0x77
+  bmp2.begin(0x77);
+  if(!status){
+    digitalWrite(led_pin, 1);
+    delay(200);
+    digitalWrite(led_pin, 0);
+    delay(200);
+    digitalWrite(led_pin, 1);
+    delay(200);
+    digitalWrite(led_pin, 0);
+  }
+  if (!status2){
+    digitalWrite(led_pin, 1);
+    delay(200);
+    digitalWrite(led_pin, 0);
+    delay(200);
+    digitalWrite(led_pin, 1);
+    delay(200);
+    digitalWrite(led_pin, 0);
+    delay(200);
+    digitalWrite(led_pin, 1);
+    delay(200);
+    digitalWrite(led_pin, 0);
+    delay(200);
+    digitalWrite(led_pin, 1);
+    delay(200);
+    digitalWrite(led_pin, 0);
+  }
+  digitalWrite(led_pin, 0);
+
+  /* Default settings from datasheet. */
+  bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,     /* Operating Mode. */
+                  Adafruit_BMP280::SAMPLING_X2,     /* Temp. oversampling */
+                  Adafruit_BMP280::SAMPLING_X16,    /* Pressure oversampling */
+                  Adafruit_BMP280::FILTER_X16,      /* Filtering. */
+                  Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
+
+  bmp2.setSampling(Adafruit_BMP280::MODE_NORMAL,     /* Operating Mode. */
+                  Adafruit_BMP280::SAMPLING_X2,     /* Temp. oversampling */
+                  Adafruit_BMP280::SAMPLING_X16,    /* Pressure oversampling */
+                  Adafruit_BMP280::FILTER_X16,      /* Filtering. */
+                  Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
+  //Serial.println("Connecting to WiFi..");
   WiFi.mode(WIFI_STA);
-  WiFi.begin("BsquaredGoogle", "6049262300");
-  while(WiFi.status() != WL_CONNECTED);
-  Serial.print("WiFi Connected:");
-  Serial.println(WiFi.localIP());
-  client.connect("192.168.86.43", 5566);
+  WiFi.begin("Testnet", "6043130575");
+  while(WiFi.status() != WL_CONNECTED){
+    analogWrite(led_pin, 5);
+  }
+  analogWrite(led_pin, 0);
+  // Serial.print("WiFi Connected:");
+  // Serial.println(WiFi.localIP());
 
 }
 
-float usedEnergy = 0;
+bool pin4 = false;
+int timer = 0;
 
 void loop() {
 
-  usedEnergy +=readVoltage()*readCurrent()*(20/(1000*360));
-
-  packet = {
-    'A',1,
-    {
-      120,
-      4
-    },
-    200,
-    (120*4)
-  };
-
-  if(timer > 4000){
-    Serial.println("Sending...");
+  packet.topTemp = bmp2.readTemperature();
+  packet.botTemp = bmp.readTemperature();
+  if (timer > 800){
+    analogWrite(led_pin, 2);
+    client.connect("192.168.137.127", 5566);
     sendBuffer = (char*)malloc(sizeof(transmit));
     memcpy(sendBuffer, (char*)&packet, sizeof(transmit));
-    client.connect("192.168.86.43", 5566);
     client.write(sendBuffer, sizeof(transmit));
-    Serial.println("Data Sent\nConfirming..");
-    delay(10);
-    recBuffer = (char*)calloc(1, sizeof(char[10]));
-    for (int i = 0; i < sizeof(char[2]); i++)
-    {
-      if(client.available()){
-        recBuffer[i] = client.read();
-      }
-      else{
-        delay(10);
-        i--;
-      }
-    }
-    Serial.print("Confirmation Recieved: ");
-    Serial.println(recBuffer);
     client.stop();
-    free(recBuffer);
-    free(sendBuffer);
+    analogWrite(led_pin, 0);
     timer = 0;
-    usedEnergy = 0;
   }
 
   delay(20);

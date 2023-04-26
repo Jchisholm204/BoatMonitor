@@ -26,10 +26,15 @@ net.createServer(client => {
 		//console.log('Received data: ' + data); // Works as a print on terminal
         console.log(data.buffer);
 		// //let dock = data[0];
-		// console.log("Dock: %s", String.fromCharCode(data[0].toString()));
+		//console.log("Dock: %s", String.fromCharCode(data[0].toString()));
 		// console.log("Slip Number: " + data.readUInt8(1));
-		// console.log("Voltage", data.readFloatLE(4));
-		// console.log("Current: ", data.readFloatLE(8));
+		 console.log("top", data.readFloatLE(0));
+		console.log("bot: ", data.readFloatLE(4));
+		topTemp = data.readFloatLE(0);
+		bottemp = data.readFloatLE(4);
+		if(topTemp > bottemp + 2){
+			topTemp = topTemp - 8;
+		}
 		// console.log("Time Elapsed: ", data.readUint32LE(12));
 		// console.log("Energy Consumed (W): ", data.readFloatLE(16));
 		// console.log("Sending OK reply..");
@@ -58,10 +63,6 @@ app.get("/message", (req, res) => {
                 topTemperature: topTemp,
                 bottomTemperature: bottemp
             });
-            bottemp = bottemp + 1;
-            topTemp = bottemp -500;
-            topHumid = 80;
-            botHumid = 73;
         }, 100);
       
 });
