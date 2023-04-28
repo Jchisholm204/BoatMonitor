@@ -74,7 +74,7 @@ analogWrite(led_pin, 2);
                   Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
   //Serial.println("Connecting to WiFi..");
   WiFi.mode(WIFI_STA);
-  WiFi.begin("Testnet", "6043130575");
+  WiFi.begin("dlink-7222", "wgyrd64487");
   while(WiFi.status() != WL_CONNECTED){
     analogWrite(led_pin, 5);
   }
@@ -93,7 +93,7 @@ void loop() {
   packet.botTemp = bmp.readTemperature();
   if (timer > 800){
     analogWrite(led_pin, 2);
-    client.connect("192.168.137.127", 5566);
+    client.connect("192.168.0.100", 5566);
     sendBuffer = (char*)malloc(sizeof(transmit));
     memcpy(sendBuffer, (char*)&packet, sizeof(transmit));
     client.write(sendBuffer, sizeof(transmit));

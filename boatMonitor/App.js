@@ -11,7 +11,7 @@ export default function App() {
 
   useEffect(() => {
     var timer = setInterval(() => {
-      fetch("http://192.168.137.127:8000/message")
+      fetch("http://192.168.0.100:8000/message")
       .then((res) => res.json())
       .then((data) => setMessage(data));
     }, 300);
